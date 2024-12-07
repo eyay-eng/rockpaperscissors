@@ -4,4 +4,6 @@
 
 void outputSelectOpt(void);
 
+void getUserName(void);
+
 #endif /*TICTACTOE_H*/
