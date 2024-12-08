@@ -1,9 +1,12 @@
-#include "tictactoe.h"
+#include "rockpaperscissors.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_LINE_LENGTH 1000
+#define MAX_LINE_LENGTH   1000
+#define COMPUTER_WIN      0
+#define USER_WIN          1
+#define TIE               3
 
 //print options for selection
 void outputSelectOpt(){
@@ -46,12 +49,42 @@ void getUserName(){
     printf("Hello, %s! Welcome!\n", name);
 }
 
+
+//randomly select from 3 options
 int generateVirtualSelect(){
 /* random int between 1 and 3 */
     int comSelect= (rand() % 2)+1;
     return(comSelect);
 }
 
-//randomly select from 3 options
-
 //compare user selection to generated option
+int findWinner(int* userChoice, int* comSelect){
+    int userInput = *userChoice;
+    int comInput = *comSelect;
+    switch(userInput){
+        case 1:
+            if (comInput == 1)
+                return(TIE);
+            else if(comInput == 2)
+                return(COMPUTER_WIN);
+            else
+                return(USER_WIN);
+        case 2:
+            if (comInput == 1)
+                return(TIE);
+            else if(comInput == 2)
+                return(COMPUTER_WIN);
+            else
+                return(USER_WIN);
+        case 3:
+            if (comInput == 1)
+                return(TIE);
+            else if(comInput == 2)
+                return(COMPUTER_WIN);
+            else
+                return(USER_WIN);
+            
+                
+    }
+    return(0);
+}
