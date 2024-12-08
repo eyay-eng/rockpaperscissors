@@ -16,6 +16,11 @@ int main(){
     for(;;){
         outputSelectOpt();
         userChoice = getUserSelect();
+        if (userChoice ==4)
+        {
+            break;
+        }
+        
         comSelect = generateVirtualSelect();
         switch(comSelect){
             case 1:
@@ -54,11 +59,6 @@ int main(){
         //reset user input
         comSelect = 0;
         userChoice = 0;
-
-        //Add exit:
-        if(!getExitPromt()){
-            break;
-        }
     }
     printf("Thanks for playing!");
 

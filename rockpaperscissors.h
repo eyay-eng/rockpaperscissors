@@ -13,6 +13,6 @@ int generateVirtualSelect(void);
 
 int findWinner(int* userChoice, int* comSelect);
 
-int getExitPromt(void);
+static int isInRange(int lowerLimit, int upperLimit, int no);
 
 #endif /*ROCKPAPERSCISSORS_H*/

@@ -3,36 +3,27 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 #define MAX_LINE_LENGTH   1000
 #define COMPUTER_WIN      0
 #define USER_WIN          1
 #define TIE               3
+#define bool int
 
 //print options for selection
 void outputSelectOpt(){
     printf("Select from options:\n"
     "[1] Rock\n"
     "[2] Paper\n"
-    "[3] Scissors\n");
+    "[3] Scissors\n"
+    "[4] Exit\n");
 }
 
-int getExitPromt(){
-    char userSelStr[MAX_LINE_LENGTH];
-    for(;;){    
-        printf("Play again? [y/n]: ");
-        fgets(userSelStr, sizeof userSelStr, stdin);
-        fflush(stdin);
-        userSelStr[strcspn(userSelStr, "\n")] = 0;
-        if(strcmp(userSelStr,"y") == 0 || strcmp(userSelStr,"Y") == 0){
-            return(1);
-        }
-        else if(strcmp(userSelStr,"n") == 0 || strcmp(userSelStr,"N") == 0){
-            return(0);
-        }
-        else
-            printf("invalid input\n");
-    }
+bool isInRange(int lowerLimit, int upperLimit, int no)
+{
+    return (lowerLimit <= no && no <= upperLimit);
 }
+
 
 int getUserSelect(){
     char userSelStr[MAX_LINE_LENGTH];
@@ -48,11 +39,11 @@ int getUserSelect(){
         userSel = atoi(userSelStr);
         memset(userSelStr, 0, sizeof userSelStr);
         //Check if input is valid
-        if(userSel == 1 || userSel == 2 || userSel == 3){
+        if(isInRange(1,4,userSel)){
             return(userSel);
         }
         else{
-            printf("invalid input: Entry must be 1,2 or 3");
+            printf("invalid input: Entry must be 1-4");
         }
     }
 }
