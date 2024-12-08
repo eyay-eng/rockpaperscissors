@@ -13,4 +13,6 @@ int generateVirtualSelect(void);
 
 int findWinner(int* userChoice, int* comSelect);
 
+int getExitPromt(void);
+
 #endif /*ROCKPAPERSCISSORS_H*/

@@ -16,6 +16,24 @@ void outputSelectOpt(){
     "[3] Scissors\n");
 }
 
+int getExitPromt(){
+    char userSelStr[MAX_LINE_LENGTH];
+    for(;;){    
+        printf("Play again? [y/n]: ");
+        fgets(userSelStr, sizeof userSelStr, stdin);
+        fflush(stdin);
+        userSelStr[strcspn(userSelStr, "\n")] = 0;
+        if(strcmp(userSelStr,"y") == 0 || strcmp(userSelStr,"Y") == 0){
+            return(1);
+        }
+        else if(strcmp(userSelStr,"n") == 0 || strcmp(userSelStr,"N") == 0){
+            return(0);
+        }
+        else
+            printf("invalid input\n");
+    }
+}
+
 int getUserSelect(){
     char userSelStr[MAX_LINE_LENGTH];
     int userSel = 0;

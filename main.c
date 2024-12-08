@@ -54,6 +54,13 @@ int main(){
         //reset user input
         comSelect = 0;
         userChoice = 0;
+
+        //Add exit:
+        if(!getExitPromt()){
+            break;
+        }
     }
+    printf("Thanks for playing!");
+
     return 0;
 }
