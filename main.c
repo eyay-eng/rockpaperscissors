@@ -4,7 +4,7 @@
 #define COMPUTER_WIN      0
 #define USER_WIN          1
 #define TIE               3
-
+#define EXIT              4
 int main(){
     int userChoice, comSelect, matchWinner;
 
@@ -15,13 +15,14 @@ int main(){
     getUserName();
     for(;;){
         outputSelectOpt();
-        userChoice = getUserSelect();
-        if (userChoice ==4)
+        getUserSelect(&userChoice);
+        //Exit choice selection:
+        if (userChoice == EXIT)
         {
             break;
         }
         
-        comSelect = generateVirtualSelect();
+        generateVirtualSelect(&comSelect);
         switch(comSelect){
             case 1:
                 printf("computer chose: ROCK\n\n");
@@ -55,10 +56,6 @@ int main(){
             "LOSSES: %d \n"
             "TIES:   %d \n", 
             totalWins, totalLosses, totalTies);
-        
-        //reset user input
-        comSelect = 0;
-        userChoice = 0;
     }
     printf("Thanks for playing!");
 

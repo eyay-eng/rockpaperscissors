@@ -25,7 +25,7 @@ bool isInRange(int lowerLimit, int upperLimit, int no)
 }
 
 
-int getUserSelect(){
+void getUserSelect(int* userSelInp){
     char userSelStr[MAX_LINE_LENGTH];
     int userSel = 0;
     for(;;)
@@ -40,7 +40,8 @@ int getUserSelect(){
         memset(userSelStr, 0, sizeof userSelStr);
         //Check if input is valid
         if(isInRange(1,4,userSel)){
-            return(userSel);
+            *userSelInp = userSel;
+            break;
         }
         else{
             printf("invalid input: Entry must be 1-4");
@@ -60,10 +61,9 @@ void getUserName(){
 
 
 //randomly select from 3 options
-int generateVirtualSelect(){
+void generateVirtualSelect(int* comSelect){
 /* random int between 1 and 3 */
-    int comSelect= 1+(rand()%(3));
-    return(comSelect);
+    *comSelect = 1+(rand()%(3));
 }
 
 //compare user selection to generated option

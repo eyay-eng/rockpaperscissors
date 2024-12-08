@@ -7,9 +7,9 @@ void outputSelectOpt(void);
 
 void getUserName(void);
 
-int getUserSelect(void);
+void getUserSelect(int* userChoice);
 
-int generateVirtualSelect(void);
+void generateVirtualSelect(int* comChoice);
 
 int findWinner(int* userChoice, int* comSelect);
 
