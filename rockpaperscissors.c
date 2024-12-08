@@ -71,7 +71,7 @@ void getUserName(){
 //randomly select from 3 options
 int generateVirtualSelect(){
 /* random int between 1 and 3 */
-    int comSelect= (rand() % 2)+1;
+    int comSelect= 1+(rand()%(3));
     return(comSelect);
 }
 
