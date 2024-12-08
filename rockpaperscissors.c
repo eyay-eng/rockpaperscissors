@@ -71,20 +71,18 @@ int findWinner(int* userChoice, int* comSelect){
                 return(USER_WIN);
         case 2:
             if (comInput == 1)
-                return(TIE);
-            else if(comInput == 2)
-                return(COMPUTER_WIN);
-            else
                 return(USER_WIN);
+            else if(comInput == 2)
+                return(TIE);
+            else
+                return(COMPUTER_WIN);
         case 3:
             if (comInput == 1)
-                return(TIE);
-            else if(comInput == 2)
                 return(COMPUTER_WIN);
-            else
+            else if(comInput == 2)
                 return(USER_WIN);
-            
-                
+            else
+                return(TIE);
     }
     return(0);
 }
