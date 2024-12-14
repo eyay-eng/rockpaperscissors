@@ -1,18 +1,43 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "rockpaperscissors.h"
 
 #define COMPUTER_WIN      0
 #define USER_WIN          1
 #define TIE               3
 #define EXIT              4
+
+#define NAME_BUFFER_SIZE    50
+
 int main(){
-    int userChoice, comSelect, matchWinner;
 
-    int totalWins = 0;
-    int totalLosses = 0;
-    int totalTies = 0;
+    //Gameplay inputs
+    int userChoice, comSelect, matchWinner, totalWins, totalLosses, totalTies;
+    userChoice = 0;
+    comSelect = 0;
+    matchWinner = 0;
+    totalWins = 0;
+    totalLosses = 0;
+    totalTies = 0;
 
-    getUserName();
+    int nameBuffer = NAME_BUFFER_SIZE;
+    char name[NAME_BUFFER_SIZE];
+
+    //Leaderboard information
+    FILE* leaderBoard;
+    const char fileName[] = "leaderboard.txt";
+    const char accessMode[] = "a+";
+    leaderBoard = fopen(fileName, accessMode);
+    if(!leaderBoard){
+        printf("unable to open leaderboard file");
+        exit(1);
+    }
+
+
+
+    getUserName(&name, &nameBuffer);
+    printf("Hello, %s! Welcome!\n", name);
+    //Main gameplay loop
     for(;;){
         outputSelectOpt();
         getUserSelect(&userChoice);
@@ -21,7 +46,6 @@ int main(){
         {
             break;
         }
-        
         generateVirtualSelect(&comSelect);
         
         
@@ -47,6 +71,9 @@ int main(){
             "TIES:   %d \n", 
             totalWins, totalLosses, totalTies);
     }
+    printf("Updating Leaderboard!");
+    //TODO update leaderboard with game statistics
+
     printf("Thanks for playing!");
 
     return 0;

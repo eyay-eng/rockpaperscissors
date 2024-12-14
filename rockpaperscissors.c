@@ -8,7 +8,6 @@
 #define COMPUTER_WIN      0
 #define USER_WIN          1
 #define TIE               3
-#define bool int
 
 //print options for selection
 void outputSelectOpt(){
@@ -19,7 +18,7 @@ void outputSelectOpt(){
     "[4] Exit\n");
 }
 
-bool isInRange(int lowerLimit, int upperLimit, int no)
+int isInRange(int lowerLimit, int upperLimit, int no)
 {
     return (lowerLimit <= no && no <= upperLimit);
 }
@@ -49,14 +48,13 @@ void getUserSelect(int* userSelInp){
     }
 }
 
-void getUserName(){
-    char name[50];
+void getUserName(char* name, int* bufSize){
+    //char name[50];
     printf("Enter your name: ");
     //safe user input with bufer
-    fgets(name, sizeof name, stdin);
+    fgets(name, *bufSize, stdin);
     //remove newline char and replace with null
     name[strcspn(name,"\n")] = 0;
-    printf("Hello, %s! Welcome!\n", name);
 }
 
 

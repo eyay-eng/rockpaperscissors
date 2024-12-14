@@ -5,7 +5,7 @@
 
 void outputSelectOpt(void);
 
-void getUserName(void);
+void getUserName(char* name, int* bufSize);
 
 void getUserSelect(int* userChoice);
 
