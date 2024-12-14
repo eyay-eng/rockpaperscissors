@@ -44,7 +44,7 @@ void getUserSelect(int* userSelInp){
             break;
         }
         else{
-            printf("invalid input: Entry must be 1-4");
+            printf("invalid input: Entry must be 1-4\n");
         }
     }
 }
@@ -62,8 +62,20 @@ void getUserName(){
 
 //randomly select from 3 options
 void generateVirtualSelect(int* comSelect){
-/* random int between 1 and 3 */
+    /* random int between 1 and 3  and output selection*/
     *comSelect = 1+(rand()%(3));
+
+    switch(*comSelect){
+            case 1:
+                printf("computer chose: ROCK\n\n");
+                break;
+            case 2:
+                printf("computer chose: PAPER\n\n");
+                break;
+            case 3:
+                printf("computer chose: SCISSORS\n\n");
+                break;
+    }
 }
 
 //compare user selection to generated option
