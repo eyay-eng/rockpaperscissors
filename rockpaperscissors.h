@@ -5,6 +5,10 @@
 #include <stdint.h>
 
 #define NAME_BUFFER_SIZE    64
+#define COMPUTER_WIN      0
+#define USER_WIN          1
+#define TIE               3
+#define EXIT              4
 
 //Structure Definition
 struct userStats_t{
@@ -18,7 +22,7 @@ struct userStats_t{
 //Prototype Definitions
 void outputSelectOpt(void);
 
-void getUserName(char* name, int* bufSize);
+void getUserName(char* name, int bufSize);
 
 void getUserSelect(int* userChoice);
 
@@ -27,5 +31,7 @@ void generateVirtualSelect(int* comChoice);
 int findWinner(int* userChoice, int* comSelect);
 
 static int isInRange(int lowerLimit, int upperLimit, int no);
+
+void mainGameplayProc(void* args);
 
 #endif /*ROCKPAPERSCISSORS_H*/

@@ -6,9 +6,6 @@
 
 
 #define MAX_LINE_LENGTH   1000
-#define COMPUTER_WIN      0
-#define USER_WIN          1
-#define TIE               3
 
 
 //print options for selection
@@ -50,11 +47,11 @@ void getUserSelect(int* userSelInp){
     }
 }
 
-void getUserName(char* name, int* bufSize){
+void getUserName(char* name, int bufSize){
     //char name[50];
     printf("Enter your name: ");
     //safe user input with bufer
-    fgets(name, *bufSize, stdin);
+    fgets(name, bufSize, stdin);
     //remove newline char and replace with null
     name[strcspn(name,"\n")] = 0;
 }
@@ -80,6 +77,7 @@ void generateVirtualSelect(int* comSelect){
 
 //compare user selection to generated option
 int findWinner(int* userChoice, int* comSelect){
+
     int userInput = *userChoice;
     int comInput = *comSelect;
     switch(userInput){
@@ -106,4 +104,46 @@ int findWinner(int* userChoice, int* comSelect){
                 return(TIE);
     }
     return(0);
+}
+
+void mainGameplayProc(void* args){
+    struct userStats_t* player1 = (struct userStats_t*)args;
+
+    int userChoice = 0;
+    int comSelect = 0;
+    int matchWinner = 0;
+
+    for(;;){
+        outputSelectOpt();
+        getUserSelect(&userChoice);
+        //Exit choice selection:
+        if (userChoice == EXIT)
+        {
+            break;
+        }
+        generateVirtualSelect(&comSelect);
+        
+        
+        matchWinner = findWinner(&userChoice, &comSelect);
+
+        switch(matchWinner){
+            case COMPUTER_WIN:
+                printf("COMPUTER WINS!\n\n");
+                player1->totalWins++;
+                break;
+            case USER_WIN:
+                printf("USER WINS!\n\n");
+                player1->totalLoss++;
+                break;
+            case TIE:
+                printf("MATCH WAS TIE!\n\n");
+                player1->totalTies++;
+                break;
+        }
+        printf("SCOREBOARD: \n"
+            "WINS:   %lu \n"
+            "LOSSES: %lu \n"
+            "TIES:   %lu \n", 
+            player1->totalWins, player1->totalLoss, player1->totalTies);
+    }
 }
