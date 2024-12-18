@@ -4,10 +4,12 @@
 #include <string.h>
 
 
+
 #define MAX_LINE_LENGTH   1000
 #define COMPUTER_WIN      0
 #define USER_WIN          1
 #define TIE               3
+
 
 //print options for selection
 void outputSelectOpt(){

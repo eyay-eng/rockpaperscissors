@@ -7,12 +7,17 @@
 #define TIE               3
 #define EXIT              4
 
-#define NAME_BUFFER_SIZE    50
+
+
+
 
 int main(){
 
     //Gameplay inputs
     int userChoice, comSelect, matchWinner, totalWins, totalLosses, totalTies;
+
+    struct userStats_t player1;
+
     userChoice = 0;
     comSelect = 0;
     matchWinner = 0;
@@ -21,7 +26,7 @@ int main(){
     totalTies = 0;
 
     int nameBuffer = NAME_BUFFER_SIZE;
-    char name[NAME_BUFFER_SIZE];
+    //char name[NAME_BUFFER_SIZE];
 
     //Leaderboard information
     FILE* leaderBoard;
@@ -29,14 +34,13 @@ int main(){
     const char accessMode[] = "a+";
     leaderBoard = fopen(fileName, accessMode);
     if(!leaderBoard){
-        printf("unable to open leaderboard file");
+        printf("Unable to open leaderboard file\n");
         exit(1);
     }
 
 
-
-    getUserName(&name, &nameBuffer);
-    printf("Hello, %s! Welcome!\n", name);
+    getUserName(player1.name, &nameBuffer);
+    printf("Hello, %s! Welcome!\n", player1.name);
     //Main gameplay loop
     for(;;){
         outputSelectOpt();
@@ -71,7 +75,7 @@ int main(){
             "TIES:   %d \n", 
             totalWins, totalLosses, totalTies);
     }
-    printf("Updating Leaderboard!");
+    printf("Updating Leaderboard!\n");
     //TODO update leaderboard with game statistics
 
     printf("Thanks for playing!");
