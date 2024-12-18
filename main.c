@@ -30,6 +30,14 @@ int main(){
     //Main gameplay loop
     mainGameplayProc(&player1);
 
+    //Update leaderboard file
+    fprintf(leaderBoard,"{USER: %s"
+    ", WINS:   %lu"
+    ", LOSSES: %lu"
+    ", TIES:   %lu}\n", 
+    player1.name, player1.totalWins, player1.totalLoss, player1.totalTies);
+
+
     printf("Updating Leaderboard!\n");
     //TODO update leaderboard with game statistics
 

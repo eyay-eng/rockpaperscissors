@@ -140,10 +140,5 @@ void mainGameplayProc(void* args){
                 player1->totalTies++;
                 break;
         }
-        printf("SCOREBOARD: \n"
-            "WINS:   %lu \n"
-            "LOSSES: %lu \n"
-            "TIES:   %lu \n", 
-            player1->totalWins, player1->totalLoss, player1->totalTies);
     }
 }
