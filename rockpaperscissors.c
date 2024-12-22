@@ -125,6 +125,7 @@ void mainGameplayProc(void* args){
         
         
         matchWinner = findWinner(&userChoice, &comSelect);
+        player1->gamesPlayed++;
 
         switch(matchWinner){
             case COMPUTER_WIN:

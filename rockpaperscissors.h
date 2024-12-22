@@ -12,6 +12,7 @@
 
 //Structure Definition
 struct userStats_t{
+    uint32_t gamesPlayed;
     uint32_t totalWins;
     uint32_t totalLoss;
     uint32_t totalTies;
