@@ -31,7 +31,7 @@ void generateVirtualSelect(int* comChoice);
 
 int findWinner(int* userChoice, int* comSelect);
 
-static int isInRange(int lowerLimit, int upperLimit, int no);
+int isInRange(int lowerLimit, int upperLimit, int no);
 
 void mainGameplayProc(void* args);
 
