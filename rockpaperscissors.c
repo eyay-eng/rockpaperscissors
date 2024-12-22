@@ -14,7 +14,7 @@ void outputSelectOpt(){
     "[1] Rock\n"
     "[2] Paper\n"
     "[3] Scissors\n"
-    "[4] Exit\n");
+    "[4] End\n");
 }
 
 int isInRange(int lowerLimit, int upperLimit, int no)
@@ -23,7 +23,7 @@ int isInRange(int lowerLimit, int upperLimit, int no)
 }
 
 
-void getUserSelect(int* userSelInp){
+void getUserSelect(int* userSelInp,int rangeLow,int rangeHigh){
     char userSelStr[MAX_LINE_LENGTH];
     int userSel = 0;
     for(;;)
@@ -37,12 +37,13 @@ void getUserSelect(int* userSelInp){
         userSel = atoi(userSelStr);
         memset(userSelStr, 0, sizeof userSelStr);
         //Check if input is valid
-        if(isInRange(1,4,userSel)){
+        if(isInRange(rangeLow,rangeHigh,userSel)){
             *userSelInp = userSel;
+            system("cls");
             break;
         }
         else{
-            printf("invalid input: Entry must be 1-4\n");
+            printf("invalid input\n");
         }
     }
 }
@@ -115,7 +116,7 @@ void mainGameplayProc(void* args){
 
     for(;;){
         outputSelectOpt();
-        getUserSelect(&userChoice);
+        getUserSelect(&userChoice,1,4);
         //Exit choice selection:
         if (userChoice == EXIT)
         {

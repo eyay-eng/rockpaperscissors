@@ -25,7 +25,7 @@ void outputSelectOpt(void);
 
 void getUserName(char* name, int bufSize);
 
-void getUserSelect(int* userChoice);
+void getUserSelect(int* userSelInp,int rangeLow,int rangeHigh);
 
 void generateVirtualSelect(int* comChoice);
 
