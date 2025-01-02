@@ -44,20 +44,30 @@ int main(){
 
     printf("Updating Leaderboard!\n");
     //TODO update leaderboard with game statistics
-    char c;
-    int count = 0;
+    // char c;
+    // int count = 0;
 
-    FILE *fp;
+    // FILE *fp;
     const char* modeRead = "r";
-    fp = fopen(fileName, modeRead);
-    //Get number of lines
-    for (c = getc(fp); c != EOF; c = getc(fp))
-        if (c == '\n') // Increment count if this character is newline
-            count = count + 1;
+    leaderBoard = fopen(fileName, modeRead);
+
+    //int filebuffer[1024];
+    char ch;
+    int lineNum = 0;
+    while ((ch = fgetc(leaderBoard)) != EOF) {
+        if(ch == '\n'){
+            lineNum++;
+        }
+        printf("%c", ch);
+        if (lineNum == 10)
+        {
+            break;
+        }
+    }
+    fclose(leaderBoard);
 
     printf("Thanks for playing!\n");
-    printf("Number of entries in leaderboard: %u",count);
-    fclose(fp);
+    // printf("Number of entries in leaderboard: %u\n",count);
 
     return 0;
 }
