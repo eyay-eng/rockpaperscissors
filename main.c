@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "rockpaperscissors.h"
 #include "statemachine.h"
@@ -35,35 +36,57 @@ int main(){
     //Update leaderboard file
     fprintf(leaderBoard,"{USER: %s"
     ", GAMESPLAYED: %u"
-    ", WINS:   %u"
+    ", WINS: %u"
     ", LOSSES: %u"
-    ", TIES:   %u}\n", 
+    ", TIES: %u}\n", 
     player1.name, player1.gamesPlayed, player1.totalWins, player1.totalLoss, player1.totalTies);
     fclose(leaderBoard);
 
-
     printf("Updating Leaderboard!\n");
-    //TODO update leaderboard with game statistics
-    // char c;
-    // int count = 0;
 
-    // FILE *fp;
+    //TODO update leaderboard with game statistics
+
     const char* modeRead = "r";
     leaderBoard = fopen(fileName, modeRead);
 
-    //int filebuffer[1024];
+    char fileBuffer[1024];
     char ch;
     int lineNum = 0;
+    int charNum = 0;
     while ((ch = fgetc(leaderBoard)) != EOF) {
         if(ch == '\n'){
             lineNum++;
         }
-        printf("%c", ch);
+        //printf("%c", ch);
+        fileBuffer[charNum] = ch;
+        charNum++;
         if (lineNum == 10)
         {
             break;
         }
     }
+
+    struct userStats_t topScore1;
+    topScore1.totalWins = 0;
+    int winFlag = 1;
+
+    //TODO update so wins can be >10
+    for(int i = 0; i<(int)sizeof(fileBuffer);i++){
+        if(isdigit(fileBuffer[i])){
+            if(winFlag){
+                if(topScore1.totalWins < (fileBuffer[i]-'0')){
+                topScore1.totalWins = fileBuffer[i]-'0';
+                }
+                winFlag = 0;
+            }
+        }
+        if(ch == '\n'){
+            lineNum++;
+            winFlag = 1;
+        }
+    }
+    printf("Top Score: %d\n",topScore1.totalWins);
+
     fclose(leaderBoard);
 
     printf("Thanks for playing!\n");
