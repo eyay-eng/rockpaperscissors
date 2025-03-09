@@ -108,7 +108,7 @@ int findWinner(int* userChoice, int* comSelect){
 }
 
 void mainGameplayProc(void* args){
-    struct userStats_t* player1 = (struct userStats_t*)args;
+    userStats_t* player1 = (userStats_t*)args;
 
     int userChoice = 0;
     int comSelect = 0;

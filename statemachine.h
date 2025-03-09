@@ -1,12 +1,14 @@
 #ifndef STATEMACHINE_H
 #define STATEMACHINE_H
 
+#include "rockpaperscissors.h"
+
 struct state;
 typedef void state_fn(struct state *);
 
 struct state{
     state_fn *next;
-    struct userStats_t *player1;
+    userStats_t *player1;
 };
 
 state_fn init_game, main_menu_state, play_game_state;

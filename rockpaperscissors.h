@@ -11,13 +11,13 @@
 #define EXIT              4
 
 //Structure Definition
-struct userStats_t{
+typedef struct {
     uint32_t gamesPlayed;
     uint32_t totalWins;
     uint32_t totalLoss;
     uint32_t totalTies;
     char name[NAME_BUFFER_SIZE];
-};
+}userStats_t;
 
 
 //Prototype Definitions
