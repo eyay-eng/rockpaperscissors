@@ -66,28 +66,120 @@ int main(){
         }
     }
 
-    struct userStats_t topScore1;
-    topScore1.totalWins = 0;
-    int winFlag = 1;
+   
+    enum leadBoardFlags{
+        USERFLAG,
+        GAMESPLAYEDFLAG,
+        WINSFLAG,
+        LOSSESFLAG,
+        TIESFLAG
+    };
 
-    //TODO update so wins can be >10
-    for(int i = 0; i<(int)sizeof(fileBuffer);i++){
-        if(isdigit(fileBuffer[i])){
-            if(winFlag){
-                if(topScore1.totalWins < (fileBuffer[i]-'0')){
-                topScore1.totalWins = fileBuffer[i]-'0';
-                }
-                winFlag = 0;
+    char numBuf[32];
+    for(int i = 0; i < 32; i++)
+    {
+        numBuf[i] = 0;
+    }
+    int numBufIdx = 0;
+    int inDataFlag = 0;
+    int leaderFlag = 0;
+
+    
+    
+    struct userStats_t topScore;
+    topScore.gamesPlayed = 0;
+    topScore.totalWins = 0;
+    topScore.totalLoss = 0;
+    topScore.totalTies = 0;
+    struct userStats_t tempScore;
+    tempScore.gamesPlayed = 0;
+    tempScore.totalWins = 0;
+    tempScore.totalLoss = 0;
+    tempScore.totalTies = 0;
+    
+
+    for(int i = 0; i<(int)sizeof(fileBuffer);i++)
+    {
+        if(fileBuffer[i] == ':')
+        {
+            inDataFlag = 1;
+            i+=2;
+        }
+        //Reset flags and local buffers
+        if(fileBuffer[i] == ',')
+        {
+            inDataFlag = 0;
+            leaderFlag++;
+            numBufIdx = 0;
+            for(int i = 0; i < 32; i++)
+            {
+                numBuf[i] = 0;
+            }
+            
+            
+        }
+        //Once completed reading line compare temp and top score
+        if(fileBuffer[i] == '\n')
+        {
+            if(tempScore.totalWins > topScore.totalWins)
+            {
+                topScore = tempScore;
+            }
+            tempScore.gamesPlayed = 0;
+            tempScore.totalWins = 0;
+            tempScore.totalLoss = 0;
+            tempScore.totalTies = 0;
+            for(int i = 0; i<NAME_BUFFER_SIZE; i++)
+            {
+                tempScore.name[i] = 0;
+            }
+            leaderFlag = 0;
+            inDataFlag = 0;
+            numBufIdx = 0;
+        }
+
+        //Compare Top Score to Temp Score at end of line
+        if(inDataFlag)
+        {
+            //Read data into correct buffer depending on 
+            if(leaderFlag == USERFLAG && inDataFlag)
+            {
+                tempScore.name[numBufIdx] = fileBuffer[i];
+                numBufIdx++;       
+            }
+            //Build Char buffer and scan into correct address
+            if(leaderFlag == GAMESPLAYEDFLAG && inDataFlag)
+            {
+                numBuf[numBufIdx] = fileBuffer[i];
+                sscanf(numBuf, "%d", &tempScore.gamesPlayed);
+                numBufIdx++;       
+            }
+            if(leaderFlag == WINSFLAG && inDataFlag)
+            {
+                numBuf[numBufIdx] = fileBuffer[i];
+                sscanf(numBuf, "%d", &tempScore.totalWins);
+                numBufIdx++;       
+            }
+            if(leaderFlag == LOSSESFLAG && inDataFlag)
+            {
+                numBuf[numBufIdx] = fileBuffer[i];
+                sscanf(numBuf, "%d", &tempScore.totalLoss);
+                numBufIdx++;       
+            }
+            if(leaderFlag == TIESFLAG && inDataFlag)
+            {
+                numBuf[numBufIdx] = fileBuffer[i];
+                sscanf(numBuf, "%d", &tempScore.totalTies);
+                numBufIdx++;       
             }
         }
-        if(ch == '\n'){
-            lineNum++;
-            winFlag = 1;
-        }
+        
     }
-    printf("Top Score: %d\n",topScore1.totalWins);
 
     fclose(leaderBoard);
+    printf("Leader: %s\n", topScore.name);
+    printf("Top Score: %d\n",topScore.totalWins);
+
 
     printf("Thanks for playing!\n");
     // printf("Number of entries in leaderboard: %u\n",count);
