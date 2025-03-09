@@ -2,9 +2,9 @@
 
 FILE* leaderBoardFile;
 const char* fileName = "leaderboard.txt";
-char* accessMode = "a+";
+//char* accessMode = "a+";
 
-void initLeaderboardFile()
+void initLeaderboardFile(char* accessMode)
 {
     leaderBoardFile = fopen(fileName, accessMode);
     if(!leaderBoardFile){
@@ -21,7 +21,7 @@ void deinitLeaderboardFile()
 void updateFileLeaderBoard(userStats_t player1)
 {
     //Open File
-    initLeaderboardFile();
+    initLeaderboardFile("a+");
     //add Player info
     fprintf(leaderBoardFile,"{USER: %s"
         ", GAMESPLAYED: %u"
@@ -35,8 +35,7 @@ void updateFileLeaderBoard(userStats_t player1)
 
 void getTopScore()
 {
-    const char* modeRead = "r";
-    leaderBoardFile = fopen(fileName, modeRead);
+    initLeaderboardFile("r");
 
     char fileBuffer[8192];
     char ch;
@@ -88,9 +87,7 @@ void getTopScore()
             for(int i = 0; i < 32; i++)
             {
                 numBuf[i] = 0;
-            }
-            
-            
+            }  
         }
         //Once completed reading line compare temp and top score
         if(fileBuffer[i] == '\n')
@@ -113,6 +110,7 @@ void getTopScore()
         }
 
         //Compare Top Score to Temp Score at end of line
+        //TODO change to switch case
         if(inDataFlag)
         {
             //Read data into correct buffer depending on 

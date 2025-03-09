@@ -15,7 +15,7 @@ enum leadBoardFlags{
     TIESFLAG
 };
 
-void initLeaderboardFile(void);
+void initLeaderboardFile(char* accessMode);
 
 void updateFileLeaderBoard(userStats_t player1);
 

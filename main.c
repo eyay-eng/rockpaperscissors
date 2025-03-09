@@ -16,18 +16,6 @@ int main(){
     player1.totalTies = 0;
     player1.gamesPlayed = 0;
 
-    //IniEt leaderBoardFile leaderBoardFile information
-    //FILE *leaderBoardFile;
-    //const char* fileName = "leaderBoardFile.txt";
-    //const char accessMode[] = "a+";
-    /*
-    leaderBoardFile = fopen(fileName, accessMode);
-    if(!leaderBoardFile){
-        printf("Unable to open leaderBoardFile file\n");
-        exit(1);
-    }
-    */
-
     //Initialize State Machine
     struct state state = {init_game, &player1};
     while (state.next) state.next(&state);
