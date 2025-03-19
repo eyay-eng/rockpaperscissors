@@ -7,6 +7,13 @@
 
 #define MAX_LINE_LENGTH   1000
 
+#ifdef __linux__
+#define clear() printf("\033[H\033[J")
+#endif
+
+#ifdef _WIN32
+#define clear() system("cls") 
+#endif
 
 //print options for selection
 void outputSelectOpt(){
@@ -39,7 +46,7 @@ void getUserSelect(int* userSelInp,int rangeLow,int rangeHigh){
         //Check if input is valid
         if(isInRange(rangeLow,rangeHigh,userSel)){
             *userSelInp = userSel;
-            system("cls");
+            clear();
             break;
         }
         else{

@@ -4,13 +4,26 @@
 #include <stdlib.h>
 
 
-
+#ifdef _WIN32
 void init_game(struct state *state)
 {
+       
     system("cls");
     getUserName(state->player1->name, NAME_BUFFER_SIZE);
     state->next = main_menu_state;
 }
+#endif
+
+#ifdef __linux__
+#define clear() printf("\033[H\033[J")
+void init_game(struct state *state)
+{
+	clear();
+	getUserName(state->player1->name, NAME_BUFFER_SIZE);
+	state->next = main_menu_state;
+}
+
+#endif
 
 void main_menu_state(struct state *state)   
 {
